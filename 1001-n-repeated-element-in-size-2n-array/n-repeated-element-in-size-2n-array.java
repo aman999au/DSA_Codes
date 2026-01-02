@@ -1,13 +1,10 @@
 class Solution {
     public int repeatedNTimes(int[] nums) {
        int n = nums.length;
-		boolean[] isRep = new boolean[10001];
-    
-        for(int num:nums){
-            if(!isRep[num]){
-                isRep[num]=true;
-            }else return num;
+		for(int i=0;i<n;i++){
+            if(i+1 <n && nums[i]==nums[i+1])return nums[i];
+            if(i+2 < n && nums[i]==nums[i+2])return nums[i];
         }
-		return -1;
+        return nums[n-1];
     }
 }
