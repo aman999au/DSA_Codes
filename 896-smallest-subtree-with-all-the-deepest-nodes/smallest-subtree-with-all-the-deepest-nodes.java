@@ -14,8 +14,32 @@
  * }
  */
 class Solution {
-    
-   public int maxDepth = -1;
+    class Pair{
+        int depth;
+        TreeNode node;
+
+        Pair(int depth,TreeNode node){
+            this.depth=depth;
+            this.node=node;
+        }
+    }
+    Pair solve(TreeNode root){
+        if(root==null )return new Pair(0, root);
+
+        Pair leftNode = solve(root.left);
+        Pair rightNode = solve(root.right);
+
+        if(leftNode.depth == rightNode.depth)return new Pair(leftNode.depth+1, root);
+        else if(leftNode.depth > rightNode.depth)return new Pair(leftNode.depth+1, leftNode.node);
+        else return new Pair(rightNode.depth+1, rightNode.node);
+    }
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+		return solve(root).node;
+    }
+
+    //LCA + Depth Approch 
+    /*
+    public int maxDepth = -1;
     public Map<Integer,Integer>mp = new HashMap<>();
 	
     public void depth(TreeNode root,int d){
@@ -41,5 +65,7 @@ class Solution {
 		depth(root, 0);
         return LCA(root);
     }
+
+    */
     
 }
