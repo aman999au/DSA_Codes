@@ -23,32 +23,27 @@ class Solution {
         ArrayList<Integer> list = new ArrayList<>();
         for (int num : nums)
             list.add(num);
-        while (!checkSorted(list)) {
+
+        while (true) {
+            boolean isSorted = true;
             PriorityQueue<Pair> pq = new PriorityQueue<>();
             for (int i = 1; i < list.size(); i++) {
                 int num1 = list.get(i - 1);
                 int num2 = list.get(i);
                 pq.add(new Pair(i, num1 + num2));
+                if (list.get(i - 1) > list.get(i)) {
+                    isSorted = false;
+                }
+            }
+            if (isSorted) {
+                break;
             }
             Pair temp = pq.poll();
             list.remove(temp.idx);
             list.set(temp.idx - 1, temp.sum);
             pair++;
-
         }
 
         return pair;
-    }
-
-    private static boolean checkSorted(ArrayList<Integer> list) {
-        int n = list.size();
-        System.out.println(list);
-        if (n == 1)
-            return true;
-        for (int i = 0; i < n - 1; i++) {
-            if (list.get(i) > list.get(i + 1))
-                return false;
-        }
-        return true;
     }
 }
