@@ -23,10 +23,10 @@ class Solution {
         ArrayList<Integer> list = new ArrayList<>();
         for (int num : nums)
             list.add(num);
+            PriorityQueue<Pair> pq = new PriorityQueue<>();
 
         while (true) {
             boolean isSorted = true;
-            PriorityQueue<Pair> pq = new PriorityQueue<>();
             for (int i = 1; i < list.size(); i++) {
                 int num1 = list.get(i - 1);
                 int num2 = list.get(i);
@@ -42,6 +42,7 @@ class Solution {
             list.remove(temp.idx);
             list.set(temp.idx - 1, temp.sum);
             pair++;
+            pq.clear();
         }
 
         return pair;
