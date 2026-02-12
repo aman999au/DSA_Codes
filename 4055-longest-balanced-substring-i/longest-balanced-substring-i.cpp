@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool checkBal(vector<int>&freq){
+        int comm = 0;
+        for(int i=0;i<26;i++){
+            if(freq[i]==0)continue;
+            if(comm==0)comm=freq[i];
+            else if(freq[i]!=comm)return false;
+        }
+        return true;
+    }
+    int longestBalanced(string s) {
+        int n =s.length();
+        int  maxL =  0;
+        for(int i=0;i<n;i++){
+            vector<int>freq(26,0);
+            for(int j=i;j<n;j++){
+                freq[s[j]-'a']++;
+                if(checkBal(freq)){
+                    maxL=max(maxL,j-i+1);
+                }
+            }
+        }
+        return maxL;
+    }
+};
